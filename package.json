@@ -32,6 +32,7 @@
     "uglify-save-license": "^0.4.1"
   },
   "dependencies": {
+    "slate": "^0.59.0",
     "slate-hyperscript": "^0.59.0"
   },
   "publishConfig": {

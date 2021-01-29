@@ -3,7 +3,7 @@
  * description: Defaults for slate.
  * homepage: https://github.com/afeiship/next-slate-defaults
  * version: 1.0.0
- * date: 2021-01-29 22:13:09
+ * date: 2021-01-29 22:17:19
  * license: MIT
  */
 

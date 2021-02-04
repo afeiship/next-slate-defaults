@@ -24,12 +24,7 @@
       },
       exporter: function (inNode, inChildren) {
         if (!inChildren) return inNode.text;
-        switch (inNode.type) {
-          case 'paragraph':
-            return '<p>' + inChildren + '</p>';
-          default:
-            return inChildren;
-        }
+        return '<p>' + inChildren + '</p>';
       }
     }
   });

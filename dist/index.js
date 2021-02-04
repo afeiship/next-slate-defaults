@@ -3,7 +3,7 @@
  * description: Defaults for slate.
  * homepage: https://github.com/afeiship/next-slate-defaults
  * version: 1.0.0
- * date: 2021-01-29 22:17:19
+ * date: 2021-02-04 10:10:45
  * license: MIT
  */
 
@@ -33,12 +33,7 @@
       },
       exporter: function (inNode, inChildren) {
         if (!inChildren) return inNode.text;
-        switch (inNode.type) {
-          case 'paragraph':
-            return '<p>' + inChildren + '</p>';
-          default:
-            return inChildren;
-        }
+        return '<p>' + inChildren + '</p>';
       }
     }
   });

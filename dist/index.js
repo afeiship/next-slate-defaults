@@ -2,8 +2,8 @@
  * name: @jswork/next-slate-defaults
  * description: Defaults for slate.
  * homepage: https://github.com/afeiship/next-slate-defaults
- * version: 1.0.0
- * date: 2021-02-04 10:10:45
+ * version: 1.0.1
+ * date: 2021-02-04 10:11:25
  * license: MIT
  */
 

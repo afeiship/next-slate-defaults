@@ -2,8 +2,8 @@
  * name: @jswork/next-slate-defaults
  * description: Defaults for slate.
  * homepage: https://github.com/afeiship/next-slate-defaults
- * version: 1.0.1
- * date: 2021-02-04 10:11:25
+ * version: 1.0.2
+ * date: 2021-02-05 21:56:09
  * license: MIT
  */
 
@@ -25,8 +25,6 @@
             return jsx('fragment', {}, inChildren);
           case 'br':
             return '\n';
-          case 'p':
-            return jsx('element', { type: 'paragraph' }, inChildren);
           default:
             return inElement.textContent;
         }

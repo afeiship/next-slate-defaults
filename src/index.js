@@ -18,7 +18,7 @@
         var editor = inContext.editor;
         return {
           is: function () {
-            const marks = Editor.marks(editor);
+            var marks = Editor.marks(editor);
             return marks ? marks[id] : false;
           },
           isHotkey: function (inEvent) {
@@ -31,7 +31,7 @@
             Editor.removeMark(editor, id);
           },
           toggle: function (inValue) {
-            const cmd = inContext.commands[id];
+            var cmd = inContext.commands[id];
             if (!cmd.is()) {
               cmd.activate(inValue);
             } else {

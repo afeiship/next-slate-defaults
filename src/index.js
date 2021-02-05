@@ -16,8 +16,6 @@
             return jsx('fragment', {}, inChildren);
           case 'br':
             return '\n';
-          case 'p':
-            return jsx('element', { type: 'paragraph' }, inChildren);
           default:
             return inElement.textContent;
         }

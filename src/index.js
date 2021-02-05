@@ -2,7 +2,7 @@
   var global = typeof window !== 'undefined' ? window : this || Function('return this')();
   var nx = global.nx || require('@jswork/next');
   var slatehyper = require('slate-hyperscript');
-  var isHotkey = require('is-hotkey');
+  var isHotkey = require('is-hotkey').default;
   var slate = require('slate');
   var jsx = slatehyper.jsx;
   var Editor = slate.Editor;

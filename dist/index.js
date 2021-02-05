@@ -3,7 +3,7 @@
  * description: Defaults for slate.
  * homepage: https://github.com/afeiship/next-slate-defaults
  * version: 1.0.2
- * date: 2021-02-05 23:55:15
+ * date: 2021-02-06 00:16:28
  * license: MIT
  */
 
@@ -11,7 +11,7 @@
   var global = typeof window !== 'undefined' ? window : this || Function('return this')();
   var nx = global.nx || require('@jswork/next');
   var slatehyper = require('slate-hyperscript');
-  var isHotkey = require('is-hotkey');
+  var isHotkey = require('is-hotkey').default;
   var slate = require('slate');
   var jsx = slatehyper.jsx;
   var Editor = slate.Editor;

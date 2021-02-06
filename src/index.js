@@ -12,6 +12,16 @@
       children: function () {
         return [{ text: '' }];
       },
+      events: function (inContext, inPlugin) {
+        return {
+          keydown: function (inEvent) {
+            const cmd = inContext.commands[inPlugin.id];
+            if (cmd.isHotkey(inEvent)) {
+              cmd.toggle(true);
+            }
+          }
+        };
+      },
       commands: function (inContext, inPlugin) {
         var id = inPlugin.id;
         var hotkey = inPlugin.hotkey;

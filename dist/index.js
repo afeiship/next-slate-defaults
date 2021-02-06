@@ -3,7 +3,7 @@
  * description: Defaults for slate.
  * homepage: https://github.com/afeiship/next-slate-defaults
  * version: 1.0.3
- * date: 2021-02-06 09:17:31
+ * date: 2021-02-06 09:29:30
  * license: MIT
  */
 
@@ -23,7 +23,7 @@
       },
       events: function (inContext, inPlugin) {
         return {
-          keydown: function (inEvent) {
+          keydown: function (inSender, inEvent) {
             const cmd = inContext.commands[inPlugin.id];
             if (cmd.isHotkey(inEvent)) {
               cmd.toggle(true);
@@ -41,6 +41,7 @@
             return marks ? marks[id] : false;
           },
           isHotkey: function (inEvent) {
+            if (!hotkey) return false;
             return isHotkey(hotkey, inEvent);
           },
           activate: (inValue) => {

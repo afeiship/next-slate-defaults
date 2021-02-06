@@ -14,7 +14,7 @@
       },
       events: function (inContext, inPlugin) {
         return {
-          keydown: function (inEvent) {
+          keydown: function (inSender, inEvent) {
             const cmd = inContext.commands[inPlugin.id];
             if (cmd.isHotkey(inEvent)) {
               cmd.toggle(true);
@@ -32,6 +32,7 @@
             return marks ? marks[id] : false;
           },
           isHotkey: function (inEvent) {
+            if (!hotkey) return false;
             return isHotkey(hotkey, inEvent);
           },
           activate: (inValue) => {

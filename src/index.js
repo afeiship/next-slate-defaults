@@ -66,15 +66,16 @@
           );
         });
       },
-      importer: function (inElement, inChildren) {
-        var nodeName = inElement.nodeName.toLowerCase();
+      importer: function (inNode, inChildren) {
+        var el = inNode.el;
+        var nodeName = el.nodeName.toLowerCase();
         switch (nodeName) {
           case 'body':
             return jsx('fragment', {}, inChildren);
           case 'br':
             return '\n';
           default:
-            return inElement.textContent;
+            return el.textContent;
         }
       },
       exporter: function (inNode, inChildren) {

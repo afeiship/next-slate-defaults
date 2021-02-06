@@ -14,7 +14,7 @@
         return [{ text: '' }];
       },
       style: function (inTarget) {
-        // if (typeof inTarget === 'string') return NxCssText.css2obj(inTarget);
+        if (typeof inTarget === 'string') return NxCssText.css2obj(inTarget);
         return inTarget ? [' style="', NxCssText.obj2css(inTarget), '"'].join('') : '';
       },
       events: function (inContext, inPlugins) {

@@ -3,7 +3,7 @@
  * description: Defaults for slate.
  * homepage: https://github.com/afeiship/next-slate-defaults
  * version: 1.0.4
- * date: 2021-02-06 09:36:39
+ * date: 2021-02-06 09:50:19
  * license: MIT
  */
 
@@ -21,44 +21,54 @@
       children: function () {
         return [{ text: '' }];
       },
-      events: function (inContext, inPlugin) {
-        return {
-          keydown: function (inSender, inEvent) {
-            const cmd = inContext.commands[inPlugin.id];
-            if (cmd.isHotkey(inEvent)) {
-              cmd.toggle(true);
-            }
-          }
-        };
+      events: function (inContext, inPlugins) {
+        inPlugins.forEach(function (plugin) {
+          plugin.events = nx.mix(
+            {
+              keydown: function (inSender, inEvent) {
+                var cmd = inContext.commands[plugin.id];
+                if (cmd.isHotkey(inEvent)) {
+                  cmd.toggle(true);
+                }
+              }
+            },
+            plugin.events
+          );
+        });
       },
-      commands: function (inContext, inPlugin) {
-        var id = inPlugin.id;
-        var hotkey = inPlugin.hotkey;
-        var editor = inContext.editor;
-        return {
-          is: function () {
-            var marks = Editor.marks(editor);
-            return marks ? marks[id] : false;
-          },
-          isHotkey: function (inEvent) {
-            if (!hotkey) return false;
-            return isHotkey(hotkey, inEvent);
-          },
-          activate: (inValue) => {
-            Editor.addMark(editor, id, inValue);
-          },
-          deactivate: function () {
-            Editor.removeMark(editor, id);
-          },
-          toggle: function (inValue) {
-            var cmd = inContext.commands[id];
-            if (!cmd.is()) {
-              cmd.activate(inValue);
-            } else {
-              cmd.deactivate();
-            }
-          }
-        };
+      commands: function (inContext, inPlugins) {
+        inPlugins.forEach((plugin) => {
+          var id = plugin.id;
+          var hotkey = plugin.hotkey;
+          var editor = inContext.editor;
+          inContext.commands[id] = nx.mix(
+            {
+              is: function () {
+                var marks = Editor.marks(editor);
+                return marks ? marks[id] : false;
+              },
+              isHotkey: function (inEvent) {
+                if (!hotkey) return false;
+                return isHotkey(hotkey, inEvent);
+              },
+              activate: (inValue) => {
+                Editor.addMark(editor, id, inValue);
+              },
+              deactivate: function () {
+                Editor.removeMark(editor, id);
+              },
+              toggle: function (inValue) {
+                var cmd = inContext.commands[id];
+                if (!cmd.is()) {
+                  cmd.activate(inValue);
+                } else {
+                  cmd.deactivate();
+                }
+              }
+            },
+            plugin.commands
+          );
+        });
       },
       importer: function (inElement, inChildren) {
         var nodeName = inElement.nodeName.toLowerCase();

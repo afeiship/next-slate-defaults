@@ -32,6 +32,7 @@
     "uglify-save-license": "^0.4.1"
   },
   "dependencies": {
+    "@jswork/next-css-text": "^1.0.1",
     "is-hotkey": "^0.2.0",
     "slate": "^0.59.0",
     "slate-hyperscript": "^0.59.0"

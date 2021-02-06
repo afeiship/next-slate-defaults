@@ -3,13 +3,14 @@
  * description: Defaults for slate.
  * homepage: https://github.com/afeiship/next-slate-defaults
  * version: 1.0.4
- * date: 2021-02-06 09:50:19
+ * date: 2021-02-06 10:47:11
  * license: MIT
  */
 
 (function () {
   var global = typeof window !== 'undefined' ? window : this || Function('return this')();
   var nx = global.nx || require('@jswork/next');
+  var NxCssText = nx.CssText || require('@jswork/next-css-text');
   var slatehyper = require('slate-hyperscript');
   var isHotkey = require('is-hotkey').default;
   var slate = require('slate');
@@ -20,6 +21,10 @@
     statics: {
       children: function () {
         return [{ text: '' }];
+      },
+      style: function (inTarget) {
+        if (typeof inTarget === 'string') return NxCssText.css2obj(css);
+        return inTarget ? [' style="', NxCssText.obj2css(inTarget), '"'].join('') : '';
       },
       events: function (inContext, inPlugins) {
         inPlugins.forEach(function (plugin) {

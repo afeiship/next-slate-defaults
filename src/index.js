@@ -23,7 +23,7 @@
             {
               keydown: function (inSender, inEvent) {
                 inEvent.preventDefault();
-                var cmd = inContext.commands[plugin.id];
+                var cmd = plugin.commands;
                 if (cmd.isHotkey(inEvent)) {
                   cmd.toggle(true);
                 }
@@ -38,7 +38,7 @@
           var id = plugin.id;
           var hotkey = plugin.hotkey;
           var editor = inContext.editor;
-          inContext.commands[id] = nx.mix(
+          plugin.commands = nx.mix(
             {
               is: function () {
                 var marks = Editor.marks(editor);
@@ -55,7 +55,7 @@
                 Editor.removeMark(editor, id);
               },
               toggle: function (inValue) {
-                var cmd = inContext.commands[id];
+                var cmd = plugin.commands;
                 if (!cmd.is()) {
                   cmd.activate(inValue);
                 } else {

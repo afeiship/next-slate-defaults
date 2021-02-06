@@ -68,7 +68,7 @@
           );
         });
       },
-      importer: function (inNode, inChildren) {
+      input: function (inNode, inChildren) {
         var el = inNode.el;
         var nodeName = el.nodeName.toLowerCase();
         switch (nodeName) {
@@ -80,7 +80,7 @@
             return el.textContent;
         }
       },
-      exporter: function (inNode, inChildren) {
+      output: function (inNode, inChildren) {
         if (!inChildren) return inNode.text;
         return '<p>' + inChildren + '</p>';
       }

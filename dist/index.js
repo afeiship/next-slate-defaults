@@ -3,7 +3,7 @@
  * description: Defaults for slate.
  * homepage: https://github.com/afeiship/next-slate-defaults
  * version: 1.0.4
- * date: 2021-02-06 10:47:11
+ * date: 2021-02-06 11:44:14
  * license: MIT
  */
 
@@ -23,7 +23,7 @@
         return [{ text: '' }];
       },
       style: function (inTarget) {
-        if (typeof inTarget === 'string') return NxCssText.css2obj(css);
+        if (typeof inTarget === 'string') return NxCssText.css2obj(inTarget);
         return inTarget ? [' style="', NxCssText.obj2css(inTarget), '"'].join('') : '';
       },
       events: function (inContext, inPlugins) {
@@ -31,7 +31,8 @@
           plugin.events = nx.mix(
             {
               keydown: function (inSender, inEvent) {
-                var cmd = inContext.commands[plugin.id];
+                inEvent.preventDefault();
+                var cmd = plugin.commands;
                 if (cmd.isHotkey(inEvent)) {
                   cmd.toggle(true);
                 }
@@ -46,11 +47,12 @@
           var id = plugin.id;
           var hotkey = plugin.hotkey;
           var editor = inContext.editor;
-          inContext.commands[id] = nx.mix(
+          plugin.commands = nx.mix(
             {
               is: function () {
                 var marks = Editor.marks(editor);
-                return marks ? marks[id] : false;
+                var res = marks ? marks[id] : false;
+                return Boolean(res);
               },
               isHotkey: function (inEvent) {
                 if (!hotkey) return false;
@@ -63,7 +65,7 @@
                 Editor.removeMark(editor, id);
               },
               toggle: function (inValue) {
-                var cmd = inContext.commands[id];
+                var cmd = plugin.commands;
                 if (!cmd.is()) {
                   cmd.activate(inValue);
                 } else {
@@ -75,15 +77,16 @@
           );
         });
       },
-      importer: function (inElement, inChildren) {
-        var nodeName = inElement.nodeName.toLowerCase();
+      importer: function (inNode, inChildren) {
+        var el = inNode.el;
+        var nodeName = el.nodeName.toLowerCase();
         switch (nodeName) {
           case 'body':
             return jsx('fragment', {}, inChildren);
           case 'br':
             return '\n';
           default:
-            return inElement.textContent;
+            return el.textContent;
         }
       },
       exporter: function (inNode, inChildren) {

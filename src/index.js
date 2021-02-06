@@ -42,7 +42,8 @@
             {
               is: function () {
                 var marks = Editor.marks(editor);
-                return marks ? marks[id] : false;
+                var res = marks ? marks[id] : false;
+                return Boolean(res);
               },
               isHotkey: function (inEvent) {
                 if (!hotkey) return false;

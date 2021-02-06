@@ -22,9 +22,9 @@
           plugin.events = nx.mix(
             {
               keydown: function (inSender, inEvent) {
-                inEvent.preventDefault();
                 var cmd = plugin.commands;
                 if (cmd.isHotkey(inEvent)) {
+                  inEvent.preventDefault();
                   cmd.toggle(true);
                 }
               }

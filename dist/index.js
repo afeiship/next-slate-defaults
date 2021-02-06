@@ -3,7 +3,7 @@
  * description: Defaults for slate.
  * homepage: https://github.com/afeiship/next-slate-defaults
  * version: 1.0.4
- * date: 2021-02-06 11:44:14
+ * date: 2021-02-06 11:53:42
  * license: MIT
  */
 
@@ -31,9 +31,9 @@
           plugin.events = nx.mix(
             {
               keydown: function (inSender, inEvent) {
-                inEvent.preventDefault();
                 var cmd = plugin.commands;
                 if (cmd.isHotkey(inEvent)) {
+                  inEvent.preventDefault();
                   cmd.toggle(true);
                 }
               }

@@ -17,57 +17,6 @@
         if (typeof inTarget === 'string') return NxCssText.css2obj(inTarget);
         return inTarget ? [' style="', NxCssText.obj2css(inTarget), '"'].join('') : '';
       },
-      events: function (inContext, inPlugins) {
-        inPlugins.forEach(function (plugin) {
-          plugin.events = nx.mix(
-            {
-              keydown: function (inSender, inEvent) {
-                var cmd = plugin.commands;
-                if (cmd.isHotkey(inEvent)) {
-                  inEvent.preventDefault();
-                  cmd.toggle(true);
-                }
-              }
-            },
-            plugin.events
-          );
-        });
-      },
-      commands: function (inContext, inPlugins) {
-        inPlugins.forEach((plugin) => {
-          var id = plugin.id;
-          var hotkey = plugin.hotkey;
-          var editor = inContext.editor;
-          plugin.commands = nx.mix(
-            {
-              is: function () {
-                var marks = Editor.marks(editor);
-                var res = marks ? marks[id] : false;
-                return Boolean(res);
-              },
-              isHotkey: function (inEvent) {
-                if (!hotkey) return false;
-                return isHotkey(hotkey, inEvent);
-              },
-              activate: (inValue) => {
-                Editor.addMark(editor, id, inValue);
-              },
-              deactivate: function () {
-                Editor.removeMark(editor, id);
-              },
-              toggle: function (inValue) {
-                var cmd = plugin.commands;
-                if (!cmd.is()) {
-                  cmd.activate(inValue);
-                } else {
-                  cmd.deactivate();
-                }
-              }
-            },
-            plugin.commands
-          );
-        });
-      },
       input: function (inNode, inChildren) {
         var el = inNode.el;
         var nodeName = el.nodeName.toLowerCase();

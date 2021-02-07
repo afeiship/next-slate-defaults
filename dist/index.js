@@ -2,8 +2,8 @@
  * name: @jswork/next-slate-defaults
  * description: Defaults for slate.
  * homepage: https://github.com/afeiship/next-slate-defaults
- * version: 1.0.4
- * date: 2021-02-06 11:53:42
+ * version: 1.0.5
+ * date: 2021-02-07 11:18:21
  * license: MIT
  */
 
@@ -26,58 +26,7 @@
         if (typeof inTarget === 'string') return NxCssText.css2obj(inTarget);
         return inTarget ? [' style="', NxCssText.obj2css(inTarget), '"'].join('') : '';
       },
-      events: function (inContext, inPlugins) {
-        inPlugins.forEach(function (plugin) {
-          plugin.events = nx.mix(
-            {
-              keydown: function (inSender, inEvent) {
-                var cmd = plugin.commands;
-                if (cmd.isHotkey(inEvent)) {
-                  inEvent.preventDefault();
-                  cmd.toggle(true);
-                }
-              }
-            },
-            plugin.events
-          );
-        });
-      },
-      commands: function (inContext, inPlugins) {
-        inPlugins.forEach((plugin) => {
-          var id = plugin.id;
-          var hotkey = plugin.hotkey;
-          var editor = inContext.editor;
-          plugin.commands = nx.mix(
-            {
-              is: function () {
-                var marks = Editor.marks(editor);
-                var res = marks ? marks[id] : false;
-                return Boolean(res);
-              },
-              isHotkey: function (inEvent) {
-                if (!hotkey) return false;
-                return isHotkey(hotkey, inEvent);
-              },
-              activate: (inValue) => {
-                Editor.addMark(editor, id, inValue);
-              },
-              deactivate: function () {
-                Editor.removeMark(editor, id);
-              },
-              toggle: function (inValue) {
-                var cmd = plugin.commands;
-                if (!cmd.is()) {
-                  cmd.activate(inValue);
-                } else {
-                  cmd.deactivate();
-                }
-              }
-            },
-            plugin.commands
-          );
-        });
-      },
-      importer: function (inNode, inChildren) {
+      input: function (inNode, inChildren) {
         var el = inNode.el;
         var nodeName = el.nodeName.toLowerCase();
         switch (nodeName) {
@@ -89,7 +38,7 @@
             return el.textContent;
         }
       },
-      exporter: function (inNode, inChildren) {
+      output: function (inNode, inChildren) {
         if (!inChildren) return inNode.text;
         return '<p>' + inChildren + '</p>';
       }

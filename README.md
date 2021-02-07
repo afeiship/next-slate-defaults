@@ -12,11 +12,12 @@ npm install -S @jswork/next-slate-defaults
 ```
 
 ## apis
-| api      | params                  | description       |
-| -------- | ----------------------- | ----------------- |
-| children | -                       | Void children.    |
-| importer | (inElement, inChildren) | Default importer. |
-| exporter | (inNode, inChildren)    | Default exporter. |
+| api      | params                  | description        |
+| -------- | ----------------------- | ------------------ |
+| children | -                       | Void children.     |
+| input    | (inElement, inChildren) | Default importer.  |
+| output   | (inNode, inChildren)    | Default exporter.  |
+| style    | (target)                | Get default style. |
 
 ## usage
 ```js
